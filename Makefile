@@ -21,14 +21,18 @@ load:
 validate:
 	$(PYTHON) src/etl/validator.py
 
-## Computes/refreshes derived financial ratios (used by later sprints too)
+## Sprint 2 — computes 17-column ratio engine for all company-years
 ratios:
-	$(PYTHON) -c "print('Ratios already loaded via 10_financial_ratios.xlsx in Sprint 1; \
-Sprint 2+ will add derived-ratio computation here.')"
+	$(PYTHON) scripts/patch_companies_sprint2.py
+	$(PYTHON) src/analytics/populate_ratios.py
+	$(PYTHON) scripts/patch_companies_sprint2.py
+	$(PYTHON) src/analytics/log_edge_cases.py
+	$(PYTHON) src/analytics/spot_check.py
+	$(PYTHON) src/analytics/screener_preview.py
 
-## Day 07 — run the 35+ unit test suite
+## Day 07 / Day 14 — run the full unit test suite (Sprint 1 + Sprint 2)
 test:
-	$(PYTHON) -m pytest tests/etl/ -v
+	$(PYTHON) -m pytest tests/etl/ tests/kpi/ -v
 
 ## Runs the 10 exploratory queries and prints results
 report:

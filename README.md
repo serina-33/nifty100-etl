@@ -50,6 +50,52 @@ Or via Makefile: `make load`, `make validate`, `make test`, `make report`.
 
 No real Nifty100 Excel extracts were provided, so `scripts/generate_source_data.py` generates **synthetic but structurally realistic** data — 92 companies, 14–16 years of financials each (with deliberately thin/short histories on a subset of companies to exercise the Day 06 manual-review step), messy year/ticker formats to exercise the normaliser, and a handful of intentionally-injected data quality issues (imbalanced balance sheets, bad URLs, dividend payouts >100%, etc.) so the 16 DQ rules have real findings to report — matching the WARNING-level findings you'd expect from real-world financial data. Swap in real source files with the same column names and the pipeline runs unchanged.
 
+## Sprint 2 — Financial Ratio Engine (Day 08–14)
+
+Builds on Sprint 1's database to compute 50+ KPIs across all 92 companies.
+
+```bash
+python3 scripts/patch_companies_sprint2.py    # adds broad_sector + supplementary pre-computed ratios file
+python3 src/analytics/populate_ratios.py       # runs the full engine, rebuilds financial_ratios table
+python3 scripts/patch_companies_sprint2.py     # re-run: builds a realistic pre-computed baseline from the fresh engine output
+python3 -m pytest tests/kpi/ -v                # 55 unit tests (target: 20+)
+python3 src/analytics/log_edge_cases.py        # Day 13: ROCE/ROE cross-check -> output/ratio_edge_cases.log
+python3 src/analytics/spot_check.py            # Day 12/14: manual recompute check (target: <0.1% diff)
+python3 src/analytics/screener_preview.py      # Day 14: ROE>15% & D/E<1 screener (target: 15-50 results)
+```
+
+Or via `make ratios`.
+
+**Why `patch_companies_sprint2.py` runs twice:** the first pass adds the `broad_sector` classification (Financials vs Non-Financials) needed by the ratio engine's D/E flag suppression logic. The second pass (after `populate_ratios.py` has run) builds the Day 13 pre-computed vendor-ratio comparison file using the *freshly computed* ROE/ROCE as a realistic baseline (with small vendor-style noise plus 5 deliberately planted anomalies) rather than stale placeholder values.
+
+### Sprint 2 — exit criteria (all verified passing)
+
+| Criterion | Result |
+|---|---|
+| `SELECT COUNT(*) FROM financial_ratios` | **1,344 rows** (target: ≥1,100) ✅ |
+| All 17 KPI/flag columns populated (no null-only columns) | ✅ |
+| KPI formula unit tests | **55/55 passing** (target: 20+) ✅ |
+| Manual spot-check (ROE + 5yr Revenue CAGR, 3 companies) | **0.0000% diff** (target: <0.1%) ✅ |
+| `ratio_edge_cases.log` — every anomaly documented + categorized | **7 anomalies logged**, all 5 planted decimal-scale glitches correctly caught ✅ |
+| Financials broad-sector D/E flag suppression | **0 incorrectly flagged** (19 companies classified as Financials) ✅ |
+| Screener preview (ROE>15% & D/E<1) | **29 companies** (target: 15-50) ✅ |
+
+### Sprint 2 file layout
+
+```
+├── src/analytics/
+│   ├── ratios.py             Day 08-09: profitability, leverage, efficiency ratios
+│   ├── cagr.py                Day 10: CAGR engine, 6 edge cases
+│   ├── cashflow_kpis.py        Day 11: FCF, CFO quality, CapEx intensity, 8-pattern classifier
+│   ├── populate_ratios.py       Day 12: runs the full engine -> financial_ratios table
+│   ├── log_edge_cases.py         Day 13: ROCE/ROE cross-check -> ratio_edge_cases.log
+│   ├── spot_check.py              Day 12/14: manual recompute verification
+│   └── screener_preview.py         Day 14: ROE/D-E screener sanity check
+├── scripts/patch_companies_sprint2.py   adds broad_sector + pre-computed ratios source file
+├── tests/kpi/{test_ratios.py, test_cagr.py, test_cashflow_kpis.py}   55 unit tests
+├── output/{capital_allocation.csv, ratio_edge_cases.log}
+```
+
 ## Week 2 — prerequisite learning deliverables (`docs/`)
 
 | File | Covers |
