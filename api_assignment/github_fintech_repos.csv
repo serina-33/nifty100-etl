@@ -1,2 +1,11 @@
 repo_name,owner,stars,forks,language,open_issues,url,description
-qlib,microsoft,48071,7612,Python,470,https://github.com/microsoft/qlib,"Qlib is an AI-oriented Quant investment platform that aims to use AI tech to empower Quant Research, from exploring idea"
+ai-berkshire,xbtlin,15997,2401,Python,36,https://github.com/xbtlin/ai-berkshire,AI 时代的伯克希尔：基于 Claude Code / Codex 的价值投资研究框架。巴菲特·芒格·段永平·李录四大师方法论 + 多Agent并行研究。| AI-era Berkshire: a value investing resea
+tushare,waditu,15374,4433,Python,755,https://github.com/waditu/tushare,TuShare is a utility for crawling historical data of China stocks
+valuecell,ValueCell-ai,11006,1807,Python,65,https://github.com/ValueCell-ai/valuecell,"ValueCell is a community-driven, multi-agent platform for financial applications."
+financial-machine-learning,firmai,8771,1409,Python,15,https://github.com/firmai/financial-machine-learning,A curated list of practical financial machine learning tools and applications.
+FinanceDatabase,JerBouma,8407,866,Python,4,https://github.com/JerBouma/FinanceDatabase,"This is a database of 300.000+ symbols containing Equities, ETFs, Funds, Indices, Currencies, Cryptocurrencies and Money"
+tradingview-mcp,atilaahmettaner,4300,919,Python,13,https://github.com/atilaahmettaner/tradingview-mcp,"TradingView MCP server — real-time market data, technical analysis, screeners & backtesting for Claude, ChatGPT, Cursor "
+zvt,zvtvz,4288,1013,Python,22,https://github.com/zvtvz/zvt,modular quant framework.
+Finance,shashankvemuri,4200,361,Python,22,https://github.com/shashankvemuri/Finance,"150+ quantitative finance Python programs to help you gather, manipulate, and analyze stock market data"
+openalgo,marketcalls,2542,1207,Python,311,https://github.com/marketcalls/openalgo,Open Source Algo Trading Platform for Everyone
+stocksight,shirosaidev,2533,494,Python,15,https://github.com/shirosaidev/stocksight,"Stock market analyzer and predictor using Elasticsearch, Twitter, News headlines and Python natural language processing "
