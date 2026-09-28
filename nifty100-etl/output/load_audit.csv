@@ -1,0 +1,12 @@
+table,source_file,rows_read,rows_loaded,rows_rejected,notes
+companies,01_companies.xlsx,92,92,0,
+sectors,09_sectors.xlsx,10,10,0,
+profitandloss,02_profit_and_loss.xlsx,1293,1293,0,
+balancesheet,03_balance_sheet.xlsx,1304,1304,0,
+cashflow,04_cash_flow.xlsx,1192,1192,0,
+analysis,06_analysis.xlsx,92,92,0,
+documents,07_documents.xlsx,92,92,0,
+prosandcons,08_pros_and_cons.xlsx,92,92,0,
+stock_prices,05_stock_prices.xlsx,5520,5520,0,
+financial_ratios,10_financial_ratios.xlsx,460,460,0,
+peer_groups,11_peer_groups.xlsx,276,276,0,
