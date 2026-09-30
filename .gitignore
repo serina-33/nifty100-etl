@@ -1,28 +1,6 @@
-"venv/
+.venv/
+venv/
 __pycache__/
 *.pyc
-.pytest_cache/
-.env" | Out-File -Encoding utf8 .gitignore
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-
-# Virtual environment
-venv/
-.venv/
-
-# Pytest
-.pytest_cache/
-htmlcov/
-.coverage
-
-# Streamlit
-.streamlit/secrets.toml
-
-# IDE
-.vscode/
-
-# OS
-.DS_Store
-Thumbs.db
+.ipynb_checkpoints/
+.env
