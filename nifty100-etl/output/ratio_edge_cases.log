@@ -1,0 +1,21 @@
+Sprint 2 · Day 13 — Ratio Engine Edge Case Log
+============================================================
+
+SECTION 1: ROCE / ROE cross-check vs pre-computed vendor source
+------------------------------------------------------------
+[ROE]  company_id=8, year=2024: computed=35.3714, source=0.359, diff=9752.8% -> category: unit/version difference (likely decimal-scale error, e.g. 0.52 vs 52.0) (note: use ratio-engine value for analytics, source value for display only)
+[ROE]  company_id=28, year=2024: computed=2.1565, source=0.0218, diff=9792.2% -> category: unit/version difference (likely decimal-scale error, e.g. 0.52 vs 52.0) (note: use ratio-engine value for analytics, source value for display only)
+[ROE]  company_id=47, year=2024: computed=175.1766, source=1.7164, diff=10106.0% -> category: unit/version difference (likely decimal-scale error, e.g. 0.52 vs 52.0) (note: use ratio-engine value for analytics, source value for display only)
+[ROE]  company_id=60, year=2024: computed=35.3172, source=33.57, diff=5.2% -> category: formula discrepancy (note: use ratio-engine value for analytics, source value for display only)
+[ROE]  company_id=65, year=2024: computed=9.2509, source=0.0959, diff=9546.4% -> category: unit/version difference (likely decimal-scale error, e.g. 0.52 vs 52.0) (note: use ratio-engine value for analytics, source value for display only)
+[ROE]  company_id=75, year=2024: computed=18.3593, source=0.1751, diff=10385.0% -> category: unit/version difference (likely decimal-scale error, e.g. 0.52 vs 52.0) (note: use ratio-engine value for analytics, source value for display only)
+[ROE]  company_id=77, year=2024: computed=1.0301, source=0.98, diff=5.1% -> category: formula discrepancy (note: use ratio-engine value for analytics, source value for display only)
+
+Total ROCE/ROE anomalies logged: 7
+
+SECTION 2: Financials broad-sector D/E flag suppression check
+------------------------------------------------------------
+Companies classified as Financials broad_sector: 19
+High-D/E Financials companies with flag correctly suppressed: 0
+Financials companies incorrectly still flagged (should be 0): 0
+Sector suppression logic verified correct.
